@@ -27,12 +27,27 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     
   }, (error, result) => {
 
-    
+    const docNumber = result.insertedCount
 
     if(error) 
     return console.log('Unable to add user')
- 
-    console.log(result.ops)
+    
+    console.log("Number of Documents Created: " + docNumber)
+
+    result.ops.forEach( (e,i) => {
+      
+
+
+      console.log("Document: " + i)
+Object.keys(e).forEach(key => {
+  console.log(key + ": " + e[key])
+
+})
+
+
+})
+
+
   
     
 
