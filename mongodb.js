@@ -3,11 +3,18 @@
 const user = require('./users')
 const tasks = require('./tasks')
 
-const mongodb = require('mongodb')
-const MongoClient = mongodb.MongoClient;
+//const mongodb = require('mongodb')
+//const MongoClient = mongodb.MongoClient;
+
+const  {MongoClient, ObjectID} = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const database = 'task-manager'
+
+
+
+const id = new ObjectID()
+
 
 //Create Connection to Database 
 MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
@@ -20,8 +27,9 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
 
 
   //Add Users To Database
-  user.addUsers(db)
+  user.addUsers(db, id)
+
   //Add Tasks to DataBase
-  tasks.addTasks(db)
+  tasks.addTasks(db, id)
 
 })

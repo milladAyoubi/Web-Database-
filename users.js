@@ -1,9 +1,10 @@
 
-const addUsers = (db) => {
+const addUsers = (db,id) => {
 
 
-    //Inserting Document into Database 
+    //Inserting Document into Database
     db.collection('users').insertOne({
+      _id: id,
       name: 'Andrew',
       age: 27 
       
