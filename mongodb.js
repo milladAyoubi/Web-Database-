@@ -28,19 +28,19 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
 
 
   //Add Users To Database
-  //user.addUsers(db)
+ //user.addUsers(db)
 
   //Add Tasks to DataBase
   //tasks.addTasks(db)
 
 
   //Find Specified User
-  find.findOneUser(db)
+  //find.findOneUser(db)
 
 
 
   //Find Multiple Users
-  findMulUsers.findMultipleUser(db)
+ findMulUsers.findMultipleUser(db)
 
 
 })
