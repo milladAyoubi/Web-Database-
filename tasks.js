@@ -18,7 +18,7 @@ const addTasks = (db) => {
         {
      
           description: 'Eating PROTEIN!!!!!!!!!!!!',
-          status: true
+          status: false
         }
     
       
