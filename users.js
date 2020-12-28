@@ -1,14 +1,40 @@
 
-const addUsers = (db,id) => {
+const addUsers = (db) => {
 
 
     //Inserting Document into Database
-    db.collection('users').insertOne({
-      _id: id,
-      name: 'Andrew',
-      age: 27 
+    db.collection('users').insertMany([
       
-    }, (error, result) => {
+      {
+    
+      name: 'Andrew',
+      age: 27,
+      program: 'Software Engineering',
+      university: 'Amazon University'
+       
+      },
+
+      {
+
+        name: 'Millad',
+        age: 21,
+        program: 'Computer Science',
+        university: 'Ryerson University'
+
+      },
+
+      {
+
+        name: 'Anno',
+        age: 21,
+        program: 'Political Science',
+        university: 'U Of T'
+
+      }
+  
+  
+  
+  ], (error, result) => {
   
       const docNumber = result.insertedCount
   

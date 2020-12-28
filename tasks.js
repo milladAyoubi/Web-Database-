@@ -1,22 +1,22 @@
-const addTasks = (db,id) => {
+const addTasks = (db) => {
 
     //Inserting Multiple Documents into Database
     db.collection('tasks').insertMany([
         {
-          _id: id,
+
           description: 'Eating Shawarmas',
           status: true
         },
     
     
         {
-          _id: id,
+
           description: 'Eating Sushi',
           status: true
         },
     
         {
-          _id: id,
+     
           description: 'Eating PROTEIN!!!!!!!!!!!!',
           status: true
         }

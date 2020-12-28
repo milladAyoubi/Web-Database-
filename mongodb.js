@@ -2,7 +2,8 @@
 //Setting up Values for Database
 const user = require('./users')
 const tasks = require('./tasks')
-
+const find = require('./findOneUser')
+const findMulUsers = require('./findMutipleUsers')
 //const mongodb = require('mongodb')
 //const MongoClient = mongodb.MongoClient;
 
@@ -27,9 +28,19 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
 
 
   //Add Users To Database
-  user.addUsers(db, id)
+  //user.addUsers(db)
 
   //Add Tasks to DataBase
-  tasks.addTasks(db, id)
+  //tasks.addTasks(db)
+
+
+  //Find Specified User
+  find.findOneUser(db)
+
+
+
+  //Find Multiple Users
+  findMulUsers.findMultipleUser(db)
+
 
 })
