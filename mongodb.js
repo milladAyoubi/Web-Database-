@@ -4,6 +4,7 @@ const user = require('./users')
 const tasks = require('./tasks')
 const find = require('./findOneUser')
 const findMulUsers = require('./findMutipleUsers')
+const updateUser =require('./updateUser')
 //const mongodb = require('mongodb')
 //const MongoClient = mongodb.MongoClient;
 
@@ -25,7 +26,7 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
   console.log('Connected Successfully!')
 
   const db = client.db(database)
-
+//Demonstation of CRUD operations using MongoDB
 
   //Add Users To Database
  //user.addUsers(db)
@@ -40,7 +41,13 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
 
 
   //Find Multiple Users
- findMulUsers.findMultipleUser(db)
+ //findMulUsers.findMultipleUser(db)
+
+
+
+ //Update Users 
+ updateUser.update(db)
+
 
 
 })
