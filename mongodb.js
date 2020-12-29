@@ -5,6 +5,7 @@ const tasks = require('./tasks')
 const find = require('./findOneUser')
 const findMulUsers = require('./findMutipleUsers')
 const updateUser =require('./updateUser')
+const updateTasks =require('./updateTasks')
 //const mongodb = require('mongodb')
 //const MongoClient = mongodb.MongoClient;
 
@@ -46,7 +47,12 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
 
 
  //Update Users 
- updateUser.update(db)
+ //updateUser.update(db)
+
+
+
+ //Update Tasks
+ updateTasks.update(db)
 
 
 
