@@ -2,10 +2,15 @@
 //Setting up Values for Database
 const user = require('./users')
 const tasks = require('./tasks')
+
 const find = require('./findOneUser')
 const findMulUsers = require('./findMutipleUsers')
-const updateUser =require('./updateUser')
-const updateTasks =require('./updateTasks')
+
+const updateUser = require('./updateUser')
+const updateTasks = require('./updateTasks')
+const deleteUser = require('./deleteUsers')
+const deleteTask = require('./deleteTasks')
+
 //const mongodb = require('mongodb')
 //const MongoClient = mongodb.MongoClient;
 
@@ -52,7 +57,22 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
 
 
  //Update Tasks
- updateTasks.update(db)
+ //updateTasks.update(db)
+
+
+ //Deleting User
+//deleteUser.del(db)
+
+
+
+
+
+//Delete Task
+//deleteTask.del(db)
+
+
+
+
 
 
 
