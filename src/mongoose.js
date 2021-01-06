@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useUnifiedTopology: true
 
 })
 
@@ -30,6 +31,8 @@ const sensai = new User({
 })
 
 sensai.save().then((sensai) => {
+
+    console.log(sensai)
 
 }).catch((error) => {
     console.log('Unexpected Error!', error)
