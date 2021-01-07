@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-
+const mongoose = require('mongoose');
+const validator = require('validator');
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
     useNewUrlParser: true,
@@ -10,16 +10,25 @@ mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
 
 
 
-
 //Mongoose Object Model Created
 const User = mongoose.model('User', {
     name: {
-        type: String
+        type: String,
+        required: true
     },
 
     age: {
-        type: Number
+        type: Number,
+
+        validate(value) {
+            if (value < 0)
+                throw new Error('Age Must Be Positive Number!')
+        }
+    },
+    email: {
+        type: String,
     }
+
 
 
 })
@@ -27,12 +36,12 @@ const User = mongoose.model('User', {
 //Creating New Object 'sensai'
 const sensai = new User({
     name: 'Daniel LaRusso',
-    age: 41
+    age: 41,
+    email: 'danny@gmail.com'
 })
 
 sensai.save().then((sensai) => {
 
-    console.log(sensai)
 
 }).catch((error) => {
     console.log('Unexpected Error!', error)
