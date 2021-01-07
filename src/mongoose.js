@@ -2,10 +2,21 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 
-const validateEmail = (validate) => {
-    if (!validator.isEmail(validate)) {
+const validateAll = (name, email, creditCard) => {
+    if (!validator.isAlpha(name, ['az-AZ'])) {
+        console.log('Name Invalid')
+        return false
+    }
+
+
+    if (!validator.isEmail(email)) {
 
         console.log('Email Invalid')
+        return false
+    }
+
+    if (!validator.isCreditCard(creditCard)) {
+        console.log('Credit Card Number Invalid')
         return false
     }
 
@@ -39,7 +50,11 @@ const User = mongoose.model('User', {
         }
     },
     email: {
-        type: String,
+        type: String
+    },
+
+    creditCard: {
+        type: String
     }
 
 
@@ -48,14 +63,15 @@ const User = mongoose.model('User', {
 
 //Creating New Object 'sensai'
 const sensai = new User({
-    name: 'Daniel LaRusso',
+    name: 'DanielLaRusso',
     age: 41,
-    email: 'danny@gmail.com'
+    email: 'dannyLarusso1984@gmail.com',
+    creditCard: '5454 3434 5435 3321'
 })
 
 sensai.save().then((sensai) => {
 
-    if (validateEmail(sensai.email)) {
+    if (validateAll(sensai.name, sensai.email, sensai.creditCard)) {
         console.log(sensai)
     }
 
