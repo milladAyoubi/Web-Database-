@@ -37,3 +37,27 @@ sensai.save().then((sensai) => {
 }).catch((error) => {
     console.log('Unexpected Error!', error)
 })
+
+
+
+const Task = mongoose.model('Task', {
+    description: {
+        type: String
+    },
+    status: {
+        type: Boolean
+    }
+
+})
+
+const task = new Task({
+    description: 'Open Up A Karate Dojo',
+    status: true
+})
+
+
+task.save().then(() => {
+    console.log(task)
+}).catch((error) => {
+    console.log(error)
+})
