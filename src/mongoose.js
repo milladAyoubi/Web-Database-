@@ -1,6 +1,19 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+
+const validateEmail = (validate) => {
+    if (!validator.isEmail(validate)) {
+
+        console.log('Email Invalid')
+        return false
+    }
+
+    return true
+}
+
+
+
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -41,6 +54,11 @@ const sensai = new User({
 })
 
 sensai.save().then((sensai) => {
+
+    if (validateEmail(sensai.email)) {
+        console.log(sensai)
+    }
+
 
 
 }).catch((error) => {
