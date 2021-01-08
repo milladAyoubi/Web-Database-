@@ -38,23 +38,41 @@ mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
 const User = mongoose.model('User', {
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
 
     age: {
         type: Number,
-
+        required: true,
         validate(value) {
             if (value < 0)
                 throw new Error('Age Must Be Positive Number!')
         }
     },
+
+
+    password: {
+        type: String,
+        required: true,
+        minlength: 7,
+        trim: true,
+
+        validate(value) {
+            if (value.includes('password'))
+                throw new Error('Password cannot contain "Password"')
+
+        }
+    },
     email: {
-        type: String
+        type: String,
+        required: true
     },
 
+
     creditCard: {
-        type: String
+        type: String,
+        required: true
     }
 
 
@@ -65,6 +83,7 @@ const User = mongoose.model('User', {
 const sensai = new User({
     name: 'DanielLaRusso',
     age: 41,
+    password: 'password',
     email: 'dannyLarusso1984@gmail.com',
     creditCard: '5454 3434 5435 3321'
 })
@@ -82,7 +101,7 @@ sensai.save().then((sensai) => {
 })
 
 
-
+//Task Model
 const Task = mongoose.model('Task', {
     description: {
         type: String
@@ -93,14 +112,17 @@ const Task = mongoose.model('Task', {
 
 })
 
-const task = new Task({
+const task1 = new Task({
     description: 'Open Up A Karate Dojo',
     status: true
 })
 
 
-task.save().then(() => {
-    console.log(task)
+
+
+
+task1.save().then(() => {
+    console.log(task1)
 }).catch((error) => {
     console.log(error)
 })
