@@ -11,6 +11,8 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 
+
+//Creating Users
 app.post('/users', (req, res) => {
     const user = new User(req.body)
 
@@ -24,7 +26,31 @@ app.post('/users', (req, res) => {
 
 })
 
+//Reading Users
+app.get('/users', (req, res) => {
+    User.find({}).then((users) => {
+        res.send(users)
+    }).catch((e) => {
+        res.send(400).send(e)
+    })
+})
 
+
+//Reading ID
+app.get('/users/:id', (req, res) => {
+        const id = req.params.id
+        User.findById(id).then((user) => {
+            if (!user) {
+                return res.status(404).send()
+            }
+
+            res.send(user)
+
+        }).catch((e) => {
+            res.status(500).send()
+        })
+    })
+    //Creating Task
 app.post('/tasks', (req, res) => {
     const task = new Task(req.body)
 
