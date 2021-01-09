@@ -29,4 +29,4 @@ task1.save().then(() => {
 })
 
 
-exports.task = Task
+module.exports = Task
