@@ -1,19 +1,20 @@
 {
-  "dependencies": {
-    "express": "^4.17.1",
-    "mongodb": "^3.6.3",
-    "mongoose": "^5.11.10",
-    "nodemon": "^2.0.7",
-    "validator": "^13.5.2"
-  },
-  "name": "MongoDB",
-  "version": "1.0.0",
-  "main": "node.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+    "dependencies": {
+        "express": "^4.17.1",
+        "mongodb": "^3.6.3",
+        "mongoose": "^5.11.10",
+        "nodemon": "^2.0.7",
+        "validator": "^13.5.2"
+    },
+    "name": "MongoDB",
+    "version": "1.0.0",
+    "main": "node.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": ""
 }
