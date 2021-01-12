@@ -54,6 +54,15 @@ app.get('/users/:id', async(req, res) => {
 //Update User By ID
 app.patch('/users/:id', async(req, res) => {
 
+    const updates = Object.keys(req.body)
+    const updateOnly = ["name", "email", "password"]
+
+    const isValidkey = updates.every((key) => {
+        return updateOnly.includes(key)
+    })
+
+    if (!isValidkey)
+        return res.status(400).send('Invalid Value Update')
 
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
@@ -111,7 +120,15 @@ app.get('/tasks/:id', (req) => {
 
 //Update Task By ID
 app.patch('/tasks/:id', async(req, res) => {
+    const updates = Object.keys(req.body)
+    const updateOnly = ["description", "status"]
 
+    const isValidkey = updates.every((key) => {
+        return updateOnly.includes(key)
+    })
+
+    if (!isValidkey)
+        return res.status(400).send('Invalid Value Update')
 
     try {
         const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
