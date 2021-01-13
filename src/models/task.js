@@ -22,11 +22,5 @@ const task1 = new Task({
 
 
 
-task1.save().then(() => {
-    console.log(task1)
-}).catch((error) => {
-    console.log(error)
-})
-
 
 module.exports = Task

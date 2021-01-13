@@ -78,7 +78,7 @@ const sensai = new User({
     creditCard: '5454 3434 5435 3321'
 })
 
-sensai.save().then((sensai) => {
+/*sensai.save().then((sensai) => {
 
     if (validateAll(sensai.name, sensai.email, sensai.creditCard)) {
         console.log(sensai)
@@ -88,7 +88,7 @@ sensai.save().then((sensai) => {
 
 }).catch((error) => {
     console.log('Unexpected Error!', error)
-})
+})*/
 
 
 module.exports = User
