@@ -19,10 +19,10 @@ router.post('/tasks', async(req, res) => {
 })
 
 //Reading Tasks
-router.get('/tasks', (req, res) => {
+router.get('/tasks', async(req, res) => {
 
     try {
-        const tasks = Task.find({})
+        const tasks = await Task.find({})
         res.send(tasks)
     } catch (e) {
         res.status(500).send(e)
