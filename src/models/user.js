@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-
+const bcrypt = require('bcrypt')
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -91,10 +91,12 @@ const sensai = new User({
         console.log('Unexpected Error!', error)
     })*/
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', async function(next) {
     const user = this
 
-    console.log('Just Before Saving!')
+    if (user.isModified('password'))
+        user.password = await bcrypt.hash(user.password, 8)
+
 
     next()
 })
