@@ -69,27 +69,27 @@ const validateAll = (name, email, creditCard) => {
 
 
 
+
 /*
-
 const sensai = new User({
-    name: 'DanielLaRusso',
-    age: 41,
-    password: 'miyagi-do',
-    email: 'dannyLarusso1984@gmail.com',
-    creditCard: '5454 3434 5435 3321'
-})
+        name: 'DanielLaRusso',
+        age: 41,
+        password: 'miyagi-do',
+        email: 'dannyLarusso1984@gmail.com',
+        creditCard: '5454 3434 5435 3321'
+    })
+  
+    sensai.save().then((sensai) => {
 
-sensai.save().then((sensai) => {
-
-    if (validateAll(sensai.name, sensai.email, sensai.creditCard)) {
-        console.log(sensai)
-    }
+        if (validateAll(sensai.name, sensai.email, sensai.creditCard)) {
+            console.log(sensai)
+        }
 
 
 
-}).catch((error) => {
-    console.log('Unexpected Error!', error)
-})*/
+    }).catch((error) => {
+        console.log('Unexpected Error!', error)
+    })*/
 
 userSchema.pre('save', function(next) {
     const user = this
