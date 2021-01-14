@@ -91,6 +91,20 @@ const sensai = new User({
         console.log('Unexpected Error!', error)
     })*/
 
+
+userSchema.statics.findByCred = async(email, password) => {
+    const user = await User.findOne({ email: email })
+
+    if (!user)
+        throw new Error('Unable To Find Email!')
+
+
+}
+
+
+
+
+//Hashing Regular Password
 userSchema.pre('save', async function(next) {
     const user = this
 
@@ -100,6 +114,7 @@ userSchema.pre('save', async function(next) {
 
     next()
 })
+
 
 
 
