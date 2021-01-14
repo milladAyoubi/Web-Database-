@@ -1,31 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-
-
-const validateAll = (name, email, creditCard) => {
-    if (!validator.isAlpha(name, ['az-AZ'])) {
-        console.log('Name Invalid')
-        return false
-    }
-
-
-    if (!validator.isEmail(email)) {
-
-        console.log('Email Invalid')
-        return false
-    }
-
-    if (!validator.isCreditCard(creditCard)) {
-        console.log('Credit Card Number Invalid')
-        return false
-    }
-
-    return true
-}
-
-
-const User = mongoose.model('User', {
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -70,6 +46,31 @@ const User = mongoose.model('User', {
 })
 
 
+const validateAll = (name, email, creditCard) => {
+    if (!validator.isAlpha(name, ['az-AZ'])) {
+        console.log('Name Invalid')
+        return false
+    }
+
+
+    if (!validator.isEmail(email)) {
+
+        console.log('Email Invalid')
+        return false
+    }
+
+    if (!validator.isCreditCard(creditCard)) {
+        console.log('Credit Card Number Invalid')
+        return false
+    }
+
+    return true
+}
+
+
+
+/*
+
 const sensai = new User({
     name: 'DanielLaRusso',
     age: 41,
@@ -78,7 +79,7 @@ const sensai = new User({
     creditCard: '5454 3434 5435 3321'
 })
 
-/*sensai.save().then((sensai) => {
+sensai.save().then((sensai) => {
 
     if (validateAll(sensai.name, sensai.email, sensai.creditCard)) {
         console.log(sensai)
@@ -90,5 +91,16 @@ const sensai = new User({
     console.log('Unexpected Error!', error)
 })*/
 
+userSchema.pre('save', function(next) {
+    const user = this
+
+    console.log('Just Before Saving!')
+
+    next()
+})
+
+
+
+const User = mongoose.model('User', userSchema)
 
 module.exports = User
