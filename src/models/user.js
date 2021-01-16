@@ -32,7 +32,15 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
+        validate(value) {
+            if (!validator.isEmail(value))
+                throw new Error('Email Invalid')
+
+        }
     },
 
 
@@ -93,12 +101,17 @@ const sensai = new User({
 
 
 userSchema.statics.findByCred = async(email, password) => {
-    const user = await User.findOne({ email: email })
+    const user = await User.findOne({ email })
 
     if (!user)
         throw new Error('Unable To Find Email!')
 
+    const match = await bcrypt.compare(password, user.password)
+    if (!match)
+        throw new Error('Password Does not Mactch!')
 
+
+    return user
 }
 
 
