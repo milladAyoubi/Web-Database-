@@ -48,7 +48,21 @@ const userSchema = new mongoose.Schema({
     creditCard: {
         type: String,
         required: true
-    }
+    },
+
+
+    tokens: [{
+            token: {
+                type: String,
+                required: true,
+
+            }
+        },
+
+        {
+
+        }
+    ]
 
 
 
@@ -106,6 +120,10 @@ userSchema.methods.generateToken = async function() {
 
     const user = this
     const token = jwt.sign({ id: user.id.toString() }, 'newToken')
+
+    //Adding Token to User
+    user.tokens = user.tokens.concat({ token })
+    await user.save()
     return token
 
 }
