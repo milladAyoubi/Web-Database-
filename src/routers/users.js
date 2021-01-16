@@ -1,10 +1,10 @@
 const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
-
+const auth = require('./middleware/auth')
 
 //Creating Users
-router.post('/users', async(req, res) => {
+router.post('/users', auth, async(req, res) => {
     const user = new User(req.body)
 
     try {
