@@ -1,10 +1,10 @@
 const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
-const auth = require('./middleware/auth')
+const auth = require('../middleware/auth')
 
 //Creating Users
-router.post('/users', auth, async(req, res) => {
+router.post('/users', async(req, res) => {
     const user = new User(req.body)
 
     try {
@@ -12,7 +12,7 @@ router.post('/users', auth, async(req, res) => {
         const token = await user.generateToken()
         res.send({ user, token })
     } catch (e) {
-        res.send(400).send(e)
+        res.status(400).send(e)
     }
 
 })
@@ -33,7 +33,7 @@ router.post('/users/login', async(req, res) => {
 
 
 //Reading Users
-router.get('/users', async(req, res) => {
+router.get('/users', auth, async(req, res) => {
 
     try {
         const users = await User.find({})
