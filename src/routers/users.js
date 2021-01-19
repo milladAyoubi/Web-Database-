@@ -31,6 +31,22 @@ router.post('/users/login', async(req, res) => {
     }
 })
 
+//User log Out
+router.post('/users/logout', auth, async(req, res) => {
+
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token
+        })
+
+        await req.user.save()
+        res.send('User: ' + req.user.email + '\n' + ' Has Logged Out')
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+
 
 //Reading Users
 router.get('/users/me', auth, async(req, res) => {
