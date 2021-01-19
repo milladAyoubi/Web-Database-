@@ -42,10 +42,23 @@ router.post('/users/logout', auth, async(req, res) => {
         await req.user.save()
         res.send('User: ' + req.user.email + '\n' + ' Has Logged Out')
     } catch (e) {
-        res.status(500).send()
+        res.status(500).send(e)
     }
 })
 
+
+//User LogoutAll Users Accounts 
+
+router.post('/users/logoutAll', auth, async(req, res) => {
+
+    try {
+        req.user.tokens = []
+        await req.user.save()
+        res.send()
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
 
 
 //Reading Users
@@ -63,7 +76,7 @@ router.get('/users/:id', async(req, res) => {
             return res.status(404).send()
         res.send(user)
     } catch (e) {
-        res.status(500).send()
+        res.status(500).send(e)
     }
 
 })
@@ -91,7 +104,7 @@ router.patch('/users/:id', async(req, res) => {
         await user.save()
 
         if (!user)
-            return res.status(404).send()
+            return res.status(404).send(e)
 
         res.send(user)
 

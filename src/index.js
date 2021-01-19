@@ -44,7 +44,7 @@ const mFunction = async() => {
     jwt.verify(token, 'newToken')
 
 
-    console.log(token)
+
 }
 
 
