@@ -16,7 +16,9 @@ const Task = mongoose.model('Task', {
 
     userTask: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
+        //Referes Back To User Profile When Creating Individual Task
+        ref: 'User'
     }
 })
 

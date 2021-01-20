@@ -142,7 +142,11 @@ userSchema.methods.generateToken = async function() {
 
 
 
-
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'userTask'
+})
 
 
 userSchema.statics.findByCred = async(email, password) => {
