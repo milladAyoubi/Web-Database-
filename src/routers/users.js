@@ -24,7 +24,7 @@ router.post('/users/login', async(req, res) => {
     try {
         const user = await User.findByCred(req.body.email, req.body.password)
         const token = await user.generateToken()
-        res.send({ user, token })
+        res.send({ user: user.getPublicData(), token })
     } catch (e) {
 
         res.status(400).send()

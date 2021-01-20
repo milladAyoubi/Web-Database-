@@ -112,6 +112,20 @@ const sensai = new User({
     })*/
 
 
+//Disply Realative Information On User Log In 
+userSchema.methods.getPublicData = function() {
+
+    const user = this
+    const userData = user.toObject()
+
+    delete userData.password
+    delete userData.creditCard
+    delete userData.tokens
+
+
+    return userData
+}
+
 
 userSchema.methods.generateToken = async function() {
 
@@ -124,6 +138,12 @@ userSchema.methods.generateToken = async function() {
     return token
 
 }
+
+
+
+
+
+
 userSchema.statics.findByCred = async(email, password) => {
     const user = await User.findOne({ email })
 
