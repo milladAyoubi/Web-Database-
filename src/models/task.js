@@ -5,12 +5,19 @@ const validator = require('validator');
 
 const Task = mongoose.model('Task', {
     description: {
-        type: String
+        type: String,
+        required: true,
+        trim: true
     },
     status: {
-        type: Boolean
-    }
+        type: Boolean,
+        default: false
+    },
 
+    userTask: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    }
 })
 
 const task1 = new Task({
