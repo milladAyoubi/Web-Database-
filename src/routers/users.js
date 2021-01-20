@@ -24,7 +24,7 @@ router.post('/users/login', async(req, res) => {
     try {
         const user = await User.findByCred(req.body.email, req.body.password)
         const token = await user.generateToken()
-        res.send({ user: user.getPublicData(), token })
+        res.send({ user, token })
     } catch (e) {
 
         res.status(400).send()
@@ -114,17 +114,14 @@ router.patch('/users/:id', async(req, res) => {
 })
 
 //Deleting User By ID
-router.delete('/users/:id', async(req, res) => {
-    const id = req.params.id
+router.delete('/users/me', auth, async(req, res) => {
+
 
     try {
-        const user = await User.findByIdAndDelete(id)
-        if (!user) {
-            return res.status(404).send()
-        }
-        res.send(user)
+        await req.user.remove()
+        res.send(req.user)
     } catch (e) {
-        res.status(400).send('Error')
+        res.status(500).send(e)
     }
 })
 

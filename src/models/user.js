@@ -113,7 +113,7 @@ const sensai = new User({
 
 
 //Disply Realative Information On User Log In 
-userSchema.methods.getPublicData = function() {
+userSchema.methods.toJSON = function() {
 
     const user = this
     const userData = user.toObject()
@@ -135,6 +135,7 @@ userSchema.methods.generateToken = async function() {
     //Adding Token to User
     user.tokens = user.tokens.concat({ token })
     await user.save()
+    console.log(token)
     return token
 
 }
