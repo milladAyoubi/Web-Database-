@@ -40,7 +40,7 @@ const main = async() => {
     const user = await User.findById(owner.userTask)
         //Populates Virtual Field tasks based on documents created by model 'Task'
     await user.populate('tasks').execPopulate()
-    console.log(user.tasks)
+        //console.log(user.tasks)
 }
 
 
