@@ -24,12 +24,23 @@ router.post('/tasks', auth, async(req, res) => {
 
 //Reading Tasks
 router.get('/tasks', auth, async(req, res) => {
-    const userID = req.user._id
+
+    const filter = req.query.status
+    const match = {}
+    if (filter === 'true')
+        match.status = true
+    else {
+        match.status = false
+    }
+
+
     try {
         await req.user.populate({
             path: 'tasks',
-            match: {
-                status: true
+            match,
+            options: {
+                limit: parseInt(req.query.limit),
+                skip: partseInt(req.query.skip)
             }
         }).execPopulate()
         res.send(req.user.tasks)
