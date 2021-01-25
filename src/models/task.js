@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 
-
-const Task = mongoose.model('Task', {
+const taskSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
@@ -20,13 +19,19 @@ const Task = mongoose.model('Task', {
         //Referes Back To User Profile When Creating Individual Task
         ref: 'User'
     }
+}, {
+    timestamps: true
 })
 
+/*
 const task1 = new Task({
     description: 'Open Up A Karate Dojo',
     status: true
 })
 
+*/
+
+const Task = mongoose.model('Task', taskSchema)
 
 
 
