@@ -35,6 +35,7 @@ app.listen(port, () => {
 const Task = require('./models/task')
 const User = require('./models/user')
 
+/*
 const main = async() => {
     const owner = await Task.findById('60088a494cfaa13e30329983')
     const user = await User.findById(owner.userTask)
@@ -44,4 +45,4 @@ const main = async() => {
 }
 
 
-main()
+main()*/
