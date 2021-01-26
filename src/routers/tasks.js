@@ -29,10 +29,16 @@ router.get('/tasks', auth, async(req, res) => {
     const match = {}
     if (filter === 'true')
         match.status = true
-    else {
+    else if (filter === 'false') {
         match.status = false
     }
 
+    const sort = {}
+
+    if (req.query.sortBy) {
+        const part = req.query.sortBy.split(':')
+        sort[part[0]] = part[1] === 'desc' ? 1 : -1
+    }
 
     try {
         await req.user.populate({
@@ -41,7 +47,8 @@ router.get('/tasks', auth, async(req, res) => {
             //Pagination Of Tasks Limiting the amount of Tasks displayd on each 'page'
             options: {
                 limit: parseInt(req.query.limit),
-                skip: parseInt(req.query.skip)
+                skip: parseInt(req.query.skip),
+                sort
             }
         }).execPopulate()
         res.send(req.user.tasks)
