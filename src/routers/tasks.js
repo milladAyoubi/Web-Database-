@@ -38,9 +38,10 @@ router.get('/tasks', auth, async(req, res) => {
         await req.user.populate({
             path: 'tasks',
             match,
+            //Pagination Of Tasks Limiting the amount of Tasks displayd on each 'page'
             options: {
                 limit: parseInt(req.query.limit),
-                skip: partseInt(req.query.skip)
+                skip: parseInt(req.query.skip)
             }
         }).execPopulate()
         res.send(req.user.tasks)
