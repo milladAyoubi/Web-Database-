@@ -23,7 +23,7 @@ const upload = multer({
     //Accept, Reject or send Error of File
     fileFilter(req, file, cb) {
 
-        if (!file.originalname.endsWith('.jpg'))
+        if (!file.originalname.match(/\.(jpg|jpeg|png|pdf|docx)$/))
             return cb(new Error('File is not a .jpg File!'))
 
         cb(undefined, true)
