@@ -12,12 +12,31 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const upload = multer({
-    dest: 'images'
+    //Set Destination folder for files
+    dest: 'images',
+    //Limit Size of File Upload 
+    limits: {
+        fileSize: 1000000
+    },
+
+
+    //Accept, Reject or send Error of File
+    fileFilter(req, file, cb) {
+
+        if (!file.originalname.endsWith('.jpg'))
+            return cb(new Error('File is not a .jpg File!'))
+
+        cb(undefined, true)
+
+    }
 })
 
 
-
-app.post('/upload ')
+//Upload a single File From Client
+app.post('/upload/spaceImage', upload.single('spaceImage'), (req, res) => {
+    console.log(req.file.filename)
+    res.send()
+})
 
 
 
