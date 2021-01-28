@@ -36,7 +36,9 @@ const upload = multer({
 app.post('/upload/spaceImage', upload.single('spaceImage'), (req, res) => {
     console.log(req.file.filename)
     res.send()
-})
+}), (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
+}
 
 
 
