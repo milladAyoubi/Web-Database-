@@ -3,8 +3,8 @@ const User = require('../models/user')
 const router = new express.Router()
 const auth = require('../middleware/auth')
 const multer = require('multer')
-const auth = require('./middleware/auth')
-    //Creating Users
+
+//Creating Users
 router.post('/users', async(req, res) => {
     const user = new User(req.body)
 
@@ -130,7 +130,7 @@ router.delete('/users/me', auth, async(req, res) => {
 
 const upload = multer({
     //Set Destination folder for files and Images
-    dest: 'images',
+    //dest: 'images',
     //Limit Size of File Upload 
     limits: {
         fileSize: 1000000
@@ -149,8 +149,8 @@ const upload = multer({
 })
 
 
-//Upload a single File From Client
-app.post('/users/upload/spaceImage', auth, upload.single('spaceImage'), async(req, res) => {
+//Upload a single File From Client and Save file with the user that is logged by saveing Image onto Buffer
+router.post('/users/upload/spaceImage', auth, upload.single('spaceImage'), async(req, res) => {
     req.user.images = req.file.buffer
     await req.user.save()
     console.log(req.user)
@@ -159,5 +159,10 @@ app.post('/users/upload/spaceImage', auth, upload.single('spaceImage'), async(re
     res.status(400).send({ error: error.message })
 }
 
-
+router.delete('/users/upload/images', auth, async(req, res) => {
+    req.user.images = undefined
+    await req.user.save()
+}), (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
+}
 module.exports = router
