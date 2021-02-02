@@ -2,8 +2,9 @@ const express = require('express')
 const User = require('../models/user')
 const router = new express.Router()
 const auth = require('../middleware/auth')
-
-//Creating Users
+const multer = require('multer')
+const auth = require('./middleware/auth')
+    //Creating Users
 router.post('/users', async(req, res) => {
     const user = new User(req.body)
 
@@ -125,6 +126,38 @@ router.delete('/users/me', auth, async(req, res) => {
         res.status(500).send(e)
     }
 })
+
+
+const upload = multer({
+    //Set Destination folder for files and Images
+    dest: 'images',
+    //Limit Size of File Upload 
+    limits: {
+        fileSize: 1000000
+    },
+
+
+    //Accept, Reject or send Error of File
+    fileFilter(req, file, cb) {
+
+        if (!file.originalname.match(/\.(jpg|jpeg|png|pdf|docx)$/))
+            return cb(new Error('File is not a .jpg File!'))
+
+        cb(undefined, true)
+
+    }
+})
+
+
+//Upload a single File From Client
+app.post('/users/upload/spaceImage', auth, upload.single('spaceImage'), async(req, res) => {
+    req.user.images = req.file.buffer
+    await req.user.save()
+    console.log(req.user)
+    res.send()
+}), (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
+}
 
 
 module.exports = router

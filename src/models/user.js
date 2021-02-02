@@ -54,7 +54,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
-
+    //For Web Tokens linking them to each individual user (Creation, log in, log out and task linkage)
     tokens: [{
         token: {
             type: String,
@@ -63,7 +63,11 @@ const userSchema = new mongoose.Schema({
         }
 
 
-    }]
+    }],
+    //Allows Images to be Saved Alongside User it Belongs to
+    images: {
+        type: Buffer
+    }
 }, {
     timestamps: true
 })
