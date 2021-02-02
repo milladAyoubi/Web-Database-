@@ -151,18 +151,35 @@ const upload = multer({
 
 //Upload a single File From Client and Save file with the user that is logged by saveing Image onto Buffer
 router.post('/users/upload/spaceImage', auth, upload.single('spaceImage'), async(req, res) => {
-    req.user.images = req.file.buffer
-    await req.user.save()
-    console.log(req.user)
-    res.send()
-}), (error, req, res, next) => {
-    res.status(400).send({ error: error.message })
-}
-
+        req.user.images = req.file.buffer
+        await req.user.save()
+        console.log(req.user)
+        res.send()
+    }), (error, req, res, next) => {
+        res.status(400).send({ error: error.message })
+    }
+    //Delete all images on User Buffer
 router.delete('/users/upload/images', auth, async(req, res) => {
     req.user.images = undefined
     await req.user.save()
 }), (error, req, res, next) => {
     res.status(400).send({ error: error.message })
 }
+
+router.get('/user/:id/images', async(req, res) => {
+    const id = req.params.id
+    try {
+        const user = await User.findById(id)
+        if (!user)
+            res.status(400).send()
+
+        res.set('Content-Type', 'image/jpg')
+        res.send(req.user.images)
+
+
+    } catch {
+        res.status(400).send()
+    }
+})
+
 module.exports = router
