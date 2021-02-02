@@ -3,8 +3,8 @@ const User = require('../models/user')
 const router = new express.Router()
 const auth = require('../middleware/auth')
 const multer = require('multer')
-
-//Creating Users
+const sharp = require('sharp')
+    //Creating Users
 router.post('/users', async(req, res) => {
     const user = new User(req.body)
 
@@ -151,7 +151,13 @@ const upload = multer({
 
 //Upload a single File From Client and Save file with the user that is logged by saveing Image onto Buffer
 router.post('/users/upload/spaceImage', auth, upload.single('spaceImage'), async(req, res) => {
-        req.user.images = req.file.buffer
+        //Setting Buffer to File Buffer and formatting and resizing image useing sharp
+        const imageBuffer = await sharp(req.file.buffer).resize({
+            width: 250,
+            height: 250
+        }).png().toBuffer()
+
+        req.user.images = imageBuffer
         await req.user.save()
         console.log(req.user)
         res.send()
@@ -173,7 +179,7 @@ router.get('/user/:id/images', async(req, res) => {
         if (!user)
             res.status(400).send()
 
-        res.set('Content-Type', 'image/jpg')
+        res.set('Content-Type', 'image/png')
         res.send(req.user.images)
 
 
