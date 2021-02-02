@@ -119,7 +119,7 @@ const sensai = new User({
     })*/
 
 
-//Disply Realative Information On User Log In 
+//Disply Realative Information On User Log In and delete sensitive Information 
 userSchema.methods.toJSON = function() {
 
     const user = this
@@ -128,7 +128,7 @@ userSchema.methods.toJSON = function() {
     delete userData.password
     delete userData.creditCard
     delete userData.tokens
-
+    delete userData.images
 
     return userData
 }

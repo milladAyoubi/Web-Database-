@@ -160,12 +160,12 @@ router.post('/users/upload/spaceImage', auth, upload.single('spaceImage'), async
     }
     //Delete all images on User Buffer
 router.delete('/users/upload/images', auth, async(req, res) => {
-    req.user.images = undefined
-    await req.user.save()
-}), (error, req, res, next) => {
-    res.status(400).send({ error: error.message })
-}
-
+        req.user.images = undefined
+        await req.user.save()
+    }), (error, req, res, next) => {
+        res.status(400).send({ error: error.message })
+    }
+    //Retrive User By ID and Display Image/File linked to it
 router.get('/user/:id/images', async(req, res) => {
     const id = req.params.id
     try {
